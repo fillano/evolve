@@ -1,4 +1,5 @@
 var evolve = require('../lib/evolve'),
+path = require('path'),
 instance = new evolve({
     basedir: path.join(__dirname, '/../www'),
     dirindex: ['index.htm','default.htm', 'index.html']
