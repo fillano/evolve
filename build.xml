@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <project name="evolve">
   <target name="unittest">
+    <exec executable="D:/node/bin/nodeunit.cmd">
+        <arg value="--reporter" />
+        <arg value="ant" />
+        <arg value="tests/testroute.js" />
+    </exec>
   </target>
   <target name="integrate">
   </target>
@@ -13,8 +18,5 @@
   <target name="alltest" depends="lint,coverage,unittest,integrate">
   </target>
   <target name="dummy">
-	  <exec executable="C:\\node\\bin\\node">
-		  <arg value="tests\\testroute.js" />
-	  </exec>
   </target>
 </project>
