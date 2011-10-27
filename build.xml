@@ -7,11 +7,16 @@
             <arg value="ant" />
             <arg value="tests/testRouter.js" />
             <arg value="tests/testCache.js" />
-            <arg value="tests/testGetRes.js" />
+            <arg value="tests/testToolsGetRes.js" />
+            <arg value="tests/testToolsCookieParser.js" />
         </exec>
     </target>
     <target name="integrate">
         <exec executable="${node.bin}${nodeunit.executable}">
+            <arg value="--reporter" />
+            <arg value="ant" />
+            <arg value="tests/testServer.js" />
+            <arg value="tests/testCookie.js" />
         </exec>
     </target>
     <target name="coverage-init">
