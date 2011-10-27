@@ -1,0 +1,4 @@
+node.location=C:\node\bin\
+node.executable=node.exe
+nodeunit.executable=nodeunit.cmd
+jscoverage.executable=jscoverage.exe

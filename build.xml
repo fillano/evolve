@@ -1,22 +1,27 @@
 <?xml version="1.0"?>
 <project name="evolve">
-  <target name="unittest">
-    <exec executable="D:/node/bin/nodeunit.cmd">
-        <arg value="--reporter" />
-        <arg value="ant" />
-        <arg value="tests/testroute.js" />
-    </exec>
-  </target>
-  <target name="integrate">
-  </target>
-  <target name="coverage-init">
-  </target>
-  <target name="coverage" depends="coverage-init">
-  </target>
-  <target name="lint">
-  </target>
-  <target name="alltest" depends="lint,coverage,unittest,integrate">
-  </target>
-  <target name="dummy">
-  </target>
+    <property file="build.properties"/>
+    <target name="unittest">
+        <exec executable="${node.bin}${nodeunit.executable}">
+            <arg value="--reporter" />
+            <arg value="ant" />
+            <arg value="tests/testRouter.js" />
+            <arg value="tests/testCache.js" />
+            <arg value="tests/testGetRes.js" />
+        </exec>
+    </target>
+    <target name="integrate">
+        <exec executable="${node.bin}${nodeunit.executable}">
+        </exec>
+    </target>
+    <target name="coverage-init">
+    </target>
+    <target name="coverage" depends="coverage-init">
+    </target>
+    <target name="lint">
+    </target>
+    <target name="alltest" depends="lint,coverage,unittest,integrate">
+    </target>
+    <target name="dummy">
+    </target>
 </project>
