@@ -2,7 +2,7 @@ var testCase = require('nodeunit').testCase;
 
 module.exports = testCase({
     setUp: function(cb) {
-        this.cache = require('../lib/cache');
+        this.cache = require('../lib-cov/cache');
         this.target = {type: 'foo', value: 'bar'};
         cb();
     },

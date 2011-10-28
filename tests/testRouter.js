@@ -2,7 +2,7 @@ var testCase = require('nodeunit').testCase;
 
 module.exports = testCase({
     setUp: function(cb) {
-        this.router = require('../lib/router');
+        this.router = require('../lib-cov/router');
         cb();
     },
     tearDown: function(cb) {

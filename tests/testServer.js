@@ -1,5 +1,5 @@
 var testCase = require('nodeunit').testCase;
-var Evolve = require('../lib/evolve');
+var Evolve = require('../lib-cov/evolve');
 
 module.exports = testCase({
     "setUp": function(cb) {

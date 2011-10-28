@@ -1,4 +1,4 @@
-var Evolve = require('../lib/evolve');
+var Evolve = require('../lib-cov/evolve');
 var testCase = require('nodeunit').testCase;
 
 module.exports = testCase({

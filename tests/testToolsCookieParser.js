@@ -2,7 +2,7 @@ var testCase = require('nodeunit').testCase;
 
 module.exports = testCase({
 	"setUp": function(cb) {
-		this.cookieParser = require('../lib/tools').cookieParser;
+		this.cookieParser = require('../lib-cov/tools').cookieParser;
 		this.obj1 = {"name1":"val1","name2":"val2"};
 		this.obj2 = {"na\"me1":"va'l1","na'me2":"va\"l2"};
 		cb();

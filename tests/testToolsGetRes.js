@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = testCase({
     setUp: function(cb) {
-        this.getRes = require('../lib/tools').getRes;
+        this.getRes = require('../lib-cov/tools').getRes;
         cb();
     },
     tearDown: function(cb) {
