@@ -1,4 +1,7 @@
-node.location=C:\node\bin\
+node.bin=C:/node/bin/
+module.root=C:/node/lib/node_modules/
 node.executable=node.exe
 nodeunit.executable=nodeunit.cmd
+nodeunit.config=nodeunit.json
 jscoverage.executable=jscoverage.exe
+jscoverage.reporter=nodeunit-coverage/lib/reporter.js

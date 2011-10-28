@@ -19,9 +19,40 @@
             <arg value="tests/testCookie.js" />
         </exec>
     </target>
-    <target name="coverage-init">
+    <target name="coverage-init" depends="clear-lib-cov">
+        <exec executable="${node.bin}${jscoverage.executable}">
+            <arg value="lib" />
+            <arg value="lib-cov" />
+        </exec>
     </target>
     <target name="coverage" depends="coverage-init">
+        <exec executable="${node.bin}${nodeunit.executable}">
+            <arg value="--config" />
+            <arg value="nodeunit.json" />
+            <arg value="--reporter" />
+            <arg value="/node/lib/node_modules/nodeunit-coverage/lib/reporter.js" />
+            <arg value="tests" />
+        </exec>
+    </target>
+    <target name="cov-report" depends="coverage-init,clear-report">
+        <exec executable="${node.bin}${nodeunit.executable}">
+            <arg value="--config" />
+            <arg value="nodeunit.json" />
+            <arg value="--reporter" />
+            <arg value="/node/lib/node_modules/nodeunit-coverage/lib/reporter.js" />
+            <arg value="tests" />
+            <arg value=">reports/coverage.log" />
+        </exec>
+    </target>
+    <target name="clear-report">
+        <delete includeemptydirs="true">
+            <fileset dir="reports" includes="**/*"/>
+        </delete>
+    </target>
+    <target name="clear-lib-cov">
+        <delete includeemptydirs="true">
+            <fileset dir="lib-cov" includes="**/*"/>
+        </delete>
     </target>
     <target name="lint">
     </target>
