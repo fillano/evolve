@@ -34,7 +34,8 @@
             <arg value="tests" />
         </exec>
     </target>
-    <target name="cov-report" depends="coverage-init,clear-report">
+    <target name="cov-report" depends="coverage-init,clear-report,report-init">
+
         <exec executable="${node.bin}${nodeunit.executable}">
             <arg value="--config" />
             <arg value="nodeunit.json" />
@@ -44,15 +45,19 @@
             <arg value=">reports/coverage.log" />
         </exec>
     </target>
-    <target name="clear-report">
+    <target name="clear-report" depends="report-init">
         <delete includeemptydirs="true">
             <fileset dir="reports" includes="**/*"/>
         </delete>
     </target>
     <target name="clear-lib-cov">
+        <mkdir dir="lib-cov"/>
         <delete includeemptydirs="true">
             <fileset dir="lib-cov" includes="**/*"/>
         </delete>
+    </target>
+    <target name="report-init">
+        <mkdir dir="reports"/>
     </target>
     <target name="lint">
     </target>
