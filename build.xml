@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="evolve">
     <property file="build.properties"/>
-    <target name="unittest">
+    <target name="unittest" depends="coverage-init">
         <exec executable="${node.bin}${nodeunit.executable}">
             <arg value="--reporter" />
             <arg value="ant" />
@@ -11,7 +11,7 @@
             <arg value="tests/testToolsCookieParser.js" />
         </exec>
     </target>
-    <target name="integrate">
+    <target name="integrate" depends="coverage-init">
         <exec executable="${node.bin}${nodeunit.executable}">
             <arg value="--reporter" />
             <arg value="ant" />
