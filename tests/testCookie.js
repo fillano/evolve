@@ -1,10 +1,12 @@
 var Evolve = require('../lib-cov/evolve');
 var testCase = require('nodeunit').testCase;
+var tools = require('../lib-cov/tools');
 
 module.exports = testCase({
     "setUp": function(cb) {
         this.http = require('http');
         this.evolve = new Evolve({dirindex: ['index.html', 'index.htm', 'default.htm']});
+        this.evolve.handle('pre', tools.cookieHandler);
         this.evolve
         .host('localhost:8443')
         .get('/testcookie', function(request, response) {
@@ -27,13 +29,14 @@ module.exports = testCase({
     },
     "test if cookie received and appended to request": function(test) {
         test.expect(2);
+        var cv = new Date().getTime();
         var req = this.http.request({
             "host": "localhost",
             "port": 8443,
             "path": "/testcookie",
             "method": "GET",
             "headers": {
-                "Cookie": "SID=1234567890abcd"
+                "Cookie": "SID="+cv
             }
         }, function(response) {
             var result = [];
@@ -48,7 +51,7 @@ module.exports = testCase({
                    entity += result[i].toString('ascii');
                 }
                 test.ok(entity.indexOf('SID')>-1);
-                test.ok(entity.indexOf('1234567890abcd')>-1);
+                test.ok(entity.indexOf(cv+"")>-1);
                 test.done();
             });
         });
