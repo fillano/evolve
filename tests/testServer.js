@@ -6,8 +6,7 @@ module.exports = testCase({
     "setUp": function(cb) {
         this.http = require('http');
         this.evolve = new Evolve({dirindex: ['index.html', 'index.htm', 'default.htm']});
-        this.evolve
-        .host('localhost:8443')
+        this.evolve.host('localhost:8443')
         .map('/', path.join(__dirname, '../www'))
         .get('/hello', function (request, response, cb) {
             cb(false, '/hello', {
