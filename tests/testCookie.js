@@ -7,17 +7,14 @@ module.exports = testCase({
         this.http = require('http');
         this.evolve = new Evolve({dirindex: ['index.html', 'index.htm', 'default.htm']});
         this.evolve.handle('pre', tools.cookieHandler);
-        this.evolve
-        .host('localhost:8443')
-        .get('/testcookie', function(request, response) {
+        this.evolve.host('localhost:8443')
+        .get('/testcookie', function(request, response, cb) {
             if(request.cookie) {
 				var str = ''+request.headers.cookie;
-                response.writeHead('200', {"Content-Type":"text/plain","Content-Length":str.length});
-                response.end(str);
+    			cb(false, '/testcookie', {type:'text/plain', data: str})
             }else{
             	var str = "no cookie";
-                response.writeHead('200', {"Content-Type":"text/plain","Content-Length":str.length});
-                response.end(str);
+    			cb(false, '/testcookie', {type:'text/plain', data: str})
             }
         });
         this.evolve.listen(8443, 'localhost');
