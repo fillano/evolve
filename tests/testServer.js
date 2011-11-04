@@ -21,6 +21,12 @@ module.exports = testCase({
                 type: 'text/html',
                 data: '<html><body>world</body></html>'
             });
+        })
+        .get('/hello_mvc', function (request, response, cb) {
+            var HelloModel = require('../lib-cov/models').hello;
+            var HelloView = require('../lib-cov/views').hello;
+            var m = new HelloModel(new HelloView(cb));
+            m.execute();
         });
         this.evolve.listen(8443, 'localhost');
         cb();
@@ -180,6 +186,33 @@ module.exports = testCase({
                 }
                 test.equal(200, response.statusCode);
                 test.equal('image/gif', response.headers['content-type']);
+                test.done();
+            });
+        });
+        req.end();
+    },
+    "test router hello_mvc": function(test) {
+        test.expect(3);
+        var req = this.http.request({
+            "host": "localhost",
+            "port": 8443,
+            "path": "/hello_mvc",
+            "method": "GET"
+        }, function(response) {
+            var result = [];
+            response.on('data', function(data) {
+                result.push(data);
+            });
+            response.on('end', function() {
+                var total = 0;
+                var entity = '';
+                for(var i=0; i<result.length; i++) {
+                   total += result[i].length;
+                   entity += result[i].toString('utf8');
+                }
+                test.equal(200, response.statusCode);
+                test.ok(entity.indexOf('Hello')>-1);
+                test.ok(entity.indexOf('fillano')>-1);
                 test.done();
             });
         });
