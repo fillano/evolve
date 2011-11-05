@@ -23,8 +23,8 @@ module.exports = testCase({
             });
         })
         .get('/hello_mvc', function (request, response, cb) {
-            var HelloModel = require('../lib-cov/models').hello;
-            var HelloView = require('../lib-cov/views').hello;
+            var HelloModel = require('./models')['hello_mvc'];
+            var HelloView = require('./views')['hello_mvc'];
             var m = new HelloModel(new HelloView(cb));
             m.execute();
         });
@@ -192,7 +192,7 @@ module.exports = testCase({
         req.end();
     },
     "test router hello_mvc": function(test) {
-        test.expect(3);
+        test.expect(6);
         var req = this.http.request({
             "host": "localhost",
             "port": 8443,
@@ -211,8 +211,11 @@ module.exports = testCase({
                    entity += result[i].toString('utf8');
                 }
                 test.equal(200, response.statusCode);
-                test.ok(entity.indexOf('Hello')>-1);
-                test.ok(entity.indexOf('fillano')>-1);
+                test.ok(entity.indexOf('test swig template')>-1);
+                test.ok(entity.indexOf('test name 1')>-1);
+                test.ok(entity.indexOf('test name 2')>-1);
+                test.ok(entity.indexOf('name1@email.com')>-1);
+                test.ok(entity.indexOf('name2@email.com')>-1);
                 test.done();
             });
         });
