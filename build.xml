@@ -30,7 +30,7 @@
             <arg value="--config" />
             <arg value="nodeunit.json" />
             <arg value="--reporter" />
-            <arg value="/node/lib/node_modules/nodeunit-coverage/lib/reporter.js" />
+            <arg value="${module.root}${jscoverage.reporter}" />
             <arg value="tests" />
         </exec>
     </target>
