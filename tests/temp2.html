@@ -1,0 +1,10 @@
+<html>
+<head><title>{{title}}</title></head>
+<body>
+<table border="1" cellspacing="0" cellpadding="2">
+{%for row in rows%}
+<tr><td>{{row.group}}</td><td>{{row.name}}</td><td>{{row.email}}</td></tr>
+{%endfor%}
+</table>
+</body>
+</html>
