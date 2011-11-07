@@ -11,10 +11,10 @@ module.exports = testCase({
         .get('/testcookie', function(request, response, cb) {
             if(request.cookie) {
 				var str = ''+request.headers.cookie;
-    			cb(false, '/testcookie', {type:'text/plain', data: str})
+    			cb(false, '/testcookie', {type:'text/plain', data: str}, true)
             }else{
             	var str = "no cookie";
-    			cb(false, '/testcookie', {type:'text/plain', data: str})
+    			cb(false, '/testcookie', {type:'text/plain', data: str}, true)
             }
         });
         this.evolve.listen(8443, 'localhost');

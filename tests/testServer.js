@@ -14,13 +14,13 @@ module.exports = testCase({
             cb(false, '/hello', {
                 type: 'text/html',
                 data: '<html><body>hello</body></html>'
-            });
+            }, true);
         })
         .get('/world', function (request, response, cb) {
             cb(false, '/world', {
                 type: 'text/html',
                 data: '<html><body>world</body></html>'
-            });
+            }, true);
         })
         .get('/hello_mvc', function (request, response, cb) {
             var HelloModel = require('./models')['hello_mvc'];
@@ -265,7 +265,7 @@ module.exports = testCase({
         var req = this.http.request({
             "host": "localhost",
             "port": 8443,
-            "path": "/hello_mvc",
+            "path": "/hello_mvc2",
             "method": "GET"
         }, function(response) {
             var result = [];

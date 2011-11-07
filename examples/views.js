@@ -23,7 +23,7 @@ module.exports = {
         };
     },
     "hello_mvc2": function(cb) {
-        var view = swig.compileFile('tests/temp3.html');
+        var view = swig.compileFile('examples/temp3.html');
         var header = swig.compileFile('tests/header.html');
         var footer = swig.compileFile('tests/footer.html');
         this.render = function(data) {
