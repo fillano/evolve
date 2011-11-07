@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var client = mysql.createClient({
     user: 'root',
-    password: '5Rjs33Ek',
+    password: '',
     host: '127.0.0.1',
     port: '3306',
     database: 'node_test'
@@ -65,5 +65,19 @@ module.exports = {
                 }
             });
         };
-    }
+    },
+    "hello_mvc2": function(view) {
+        var data = {
+            title: 'test swig template',
+            rows: [
+                {name: 'test name 1', email: 'name1@email.com'},
+                {name: 'test name 2', email: 'name2@email.com'}
+            ]
+        };
+        this.execute = function() {
+            process.nextTick(function() {
+                view.render(data);
+            });
+        }
+    },
 };

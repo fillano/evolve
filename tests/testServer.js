@@ -33,15 +33,19 @@ module.exports = testCase({
             var HelloView = require('./views')['hello_mvc1'];
             var m = new HelloModel(new HelloView(cb));
             m.execute();
+        })
+        .get('/hello_mvc2', function (request, response, cb) {
+            var HelloModel = require('./models')['hello_mvc2'];
+            var HelloView = require('./views')['hello_mvc2'];
+            var m = new HelloModel(new HelloView(cb));
+            m.execute();
         });
-        this.evolve.listen(8443, 'localhost');
-        cb();
+        this.evolve.listen(8443, 'localhost', cb);
     },
     "tearDown": function(cb) {
-        this.evolve.close();
+        this.evolve.close(cb);
         this.evolve = null;
         delete this.evolve;
-        cb();
     },
     "test default index": function(test) {
         test.expect(2);
@@ -251,6 +255,36 @@ module.exports = testCase({
                 test.ok(entity.indexOf('<tr><td>group1</td><td>name2</td><td>name2@email.com</td></tr>')>-1);
                 test.ok(entity.indexOf('<tr><td>group2</td><td>name3</td><td>name3@yupa.com</td></tr>')>-1);
                 test.ok(entity.indexOf('<tr><td>group2</td><td>name4</td><td>name4@yupa.com</td></tr>')>-1);
+                test.done();
+            });
+        });
+        req.end();
+    },
+    "test router hello_mvc2": function(test) {
+        test.expect(6);
+        var req = this.http.request({
+            "host": "localhost",
+            "port": 8443,
+            "path": "/hello_mvc",
+            "method": "GET"
+        }, function(response) {
+            var result = [];
+            response.on('data', function(data) {
+                result.push(data);
+            });
+            response.on('end', function() {
+                var total = 0;
+                var entity = '';
+                for(var i=0; i<result.length; i++) {
+                   total += result[i].length;
+                   entity += result[i].toString('utf8');
+                }
+                test.equal(200, response.statusCode);
+                test.ok(entity.indexOf('test swig template')>-1);
+                test.ok(entity.indexOf('test name 1')>-1);
+                test.ok(entity.indexOf('test name 2')>-1);
+                test.ok(entity.indexOf('name1@email.com')>-1);
+                test.ok(entity.indexOf('name2@email.com')>-1);
                 test.done();
             });
         });
