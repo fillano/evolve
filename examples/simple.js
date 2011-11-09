@@ -1,10 +1,23 @@
 var Evolve = require('../lib/evolve');
 var tools = require('../lib/tools');
 var path = require('path');
-var server = new Evolve({
-    dirindex: ['index.html', 'index.htm', 'default.htm']
-});
-server
+var cluster = require('cluster');
+var config = require('./config');
+
+if(cluster.isMaster) {
+    var i=0, l=config.workers||2;
+    for(; i<l; i++) {
+        var worker = cluster.fork();
+        worker.on('message', function(msg) {
+        });
+    }
+    cluster.on('death', function(worker) {
+        console.log('worker: ' + worker.pid + ' died.');
+        cluster.fork();
+    });
+} else {
+
+var server = new Evolve(config)
 .handle('pre',  tools.cookieHandler)
 .host('localhost:8443')
 .map('/', path.join(__dirname, '../www'))
@@ -33,3 +46,4 @@ server
     m.execute();
 })
 .listen(8443, 'localhost');
+}

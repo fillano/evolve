@@ -39,10 +39,12 @@ module.exports = {
             var i=0;
             var ret = {};
             for(; i<obj.length; i++) {
-                if(obj[i][0].title) {
-                    ret.title = obj[i].title;
-                } else {
-                    ret.rows = obj[i]
+                if(obj[i] && obj[i].length>0) {
+                    if(obj[i][0].title) {
+                        ret.title = obj[i].title;
+                    } else {
+                        ret.rows = obj[i]
+                    }
                 }
             }
             client.end();
@@ -54,6 +56,7 @@ module.exports = {
                     sync.next(results);
                 } else {
                     console.log('err 1.');
+                    sync.next([]);
                 }
             });
             
@@ -62,6 +65,7 @@ module.exports = {
                     sync.next(results);
                 } else {
                     console.log('err 2.');
+                    sync.next([]);
                 }
             });
         };

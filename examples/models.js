@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var client = mysql.createClient({
     user: 'root',
-    password: '5Rjs33Ek',
+    password: '',
     host: '127.0.0.1',
     port: '3306',
     database: 'node_test'
@@ -54,6 +54,7 @@ module.exports = {
                     sync.next(results);
                 } else {
                     console.log('err 1.');
+                    sync.next({});
                 }
             });
             
@@ -62,6 +63,7 @@ module.exports = {
                     sync.next(results);
                 } else {
                     console.log('err 2.');
+                    sync.next({});
                 }
             });
         };
