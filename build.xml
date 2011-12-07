@@ -8,7 +8,7 @@
             <arg value="tests/testRouter.js" />
             <arg value="tests/testCache.js" />
             <arg value="tests/testToolsGetRes.js" />
-            <arg value="tests/testToolsCookieParser.js" />
+            <arg value="tests/testCookieParser.js" />
         </exec>
     </target>
     <target name="integrate" depends="coverage-init">

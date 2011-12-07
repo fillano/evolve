@@ -1,0 +1,9 @@
+module.exports = {
+    workers: 8,
+    dirindex: ['default.htm', 'index.html'],
+    dbuser: 'root',
+    dbpassword: '',
+    dbhost: 'localhost',
+    dbport: 3306,
+    dbname: 'node_test'
+};

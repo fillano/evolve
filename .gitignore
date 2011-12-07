@@ -1,3 +1,4 @@
 build.properties
 reports/*
 lib-cov/*
+*config.js

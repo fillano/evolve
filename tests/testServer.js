@@ -6,9 +6,9 @@ var tools = require('../lib-cov/tools');
 module.exports = testCase({
     "setUp": function(cb) {
         this.http = require('http');
-        this.evolve = new Evolve({dirindex: ['index.html', 'index.htm', 'default.htm']});
-        this.evolve.handle('pre', tools.cookieHandler);
-        this.evolve.host('localhost:8443')
+        this.evolve = new Evolve({dirindex: ['index.html', 'index.htm', 'default.htm']})
+	.use('cookie')
+        .host('localhost:8443')
         .map('/', path.join(__dirname, '../www'))
         .get('/hello', function (request, response, cb) {
             cb(false, '/hello', {
@@ -39,8 +39,8 @@ module.exports = testCase({
             var HelloView = require('./views')['hello_mvc2'];
             var m = new HelloModel(new HelloView(cb));
             m.execute();
-        });
-        this.evolve.listen(8443, 'localhost', cb);
+        })
+        .listen(8443, 'localhost', cb);
     },
     "tearDown": function(cb) {
         this.evolve.close(cb);

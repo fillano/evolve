@@ -1,10 +1,11 @@
 var mysql = require('mysql');
+var config = require('./config');
 var client = mysql.createClient({
-    user: 'root',
-    password: '5Rjs33Ek',
-    host: '127.0.0.1',
-    port: '3306',
-    database: 'node_test'
+    user: config.dbuser,
+    password: config.dbpassword,
+    host: config.dbpassword,
+    port: config.dbport,
+    database: config.dbname
 });
 
 function Wait(count, cb) {
